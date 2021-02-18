@@ -8,7 +8,7 @@ import { getUserDetails, updateUserProfile } from '../../actions/userActions'
 import { listMyOrders } from '../../actions/orderActions'
 import { USER_UPDATE_PROFILE_RESET } from '../../constants/userConstants'
 
-const ProfileScreen = ({location, history}) => {
+const ProfileScreen = ({history}) => {
     const [email,setEmail] = useState('')
     const [name,setName] = useState('')
     const [password, setPassword] = useState('')
