@@ -16,6 +16,13 @@ import {
     PRODUCT_UPDATE_SUCCES,
     PRODUCT_UPDATE_FAILED,
     PRODUCT_UPDATE_RESET,
+    PRODUCT_CREATE_REVIEW_REQUEST,
+    PRODUCT_CREATE_REVIEW_SUCCES,
+    PRODUCT_CREATE_REVIEW_FAILED,
+    PRODUCT_CREATE_REVIEW_RESET,
+    PRODUCT_TOP_REQUEST,
+    PRODUCT_TOP_SUCCES,
+    PRODUCT_TOP_FAILED,
 } from '../constants/productContstans'
 
 export const productListReducer = (state = { products: [] }, action) => {
@@ -23,9 +30,9 @@ export const productListReducer = (state = { products: [] }, action) => {
         case PRODUCT_LIST_REQUEST:
             return { loading: true, products: []}
         case PRODUCT_LIST_SUCCES:
-            return { loading: false, products: action.payload}
+            return { loading: false, products: action.payload.products, pages: action.payload.pages, page: action.payload.page }
         case PRODUCT_LIST_FAILED:
-            return { loading: false, error: action.payload}
+            return { loading: false, error: action.payload }
         default:
             return state
     }
@@ -82,6 +89,34 @@ export const productUpdateReducer = (state = { product: {} }, action) => {
             return { loading: false, error: action.payload}
         case PRODUCT_UPDATE_RESET:
             return { product: {} }
+        default:
+            return state
+    }
+}
+
+export const productReviewCreateReducer = (state = { }, action) => {
+    switch(action.type) {
+        case PRODUCT_CREATE_REVIEW_REQUEST:
+            return { loading: true }
+        case PRODUCT_CREATE_REVIEW_SUCCES:
+            return { loading: false, success: true}
+        case PRODUCT_CREATE_REVIEW_FAILED:
+            return { loading: false, error: action.payload}
+        case PRODUCT_CREATE_REVIEW_RESET:
+            return {}
+        default:
+            return state
+    }
+}
+
+export const productTopReducer = (state = { products: []}, action) => {
+    switch(action.type) {
+        case PRODUCT_TOP_REQUEST:
+            return { loading: true, products: [] }
+        case PRODUCT_TOP_SUCCES:
+            return { loading: false, products: action.payload}
+        case PRODUCT_TOP_FAILED:
+            return { loading: false, error: action.payload}
         default:
             return state
     }
